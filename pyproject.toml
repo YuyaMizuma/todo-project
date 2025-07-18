@@ -1,0 +1,27 @@
+[project]
+name = "todo-project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "YuyaMizuma",email = "mizuma.yuya.2003@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi (>=0.116.1,<0.117.0)",
+    "uvicorn[standard] (>=0.35.0,<0.36.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.3.0"
+black = "^25.1.0"
+pytest = "^8.4.1"
+httpx = "^0.28.1"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
