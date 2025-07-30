@@ -1,5 +1,5 @@
 from typing import List, Optional
-from sqlmodel import Field, Relationship, sqlmodel
+from sqlmodel import Field, Relationship, SQLModel
 from datetime import datetime
 
 class TodoBase(SQLModel):
@@ -25,3 +25,10 @@ class Subtask(SubtaskBase, table=True):
 
     #Subtaskから親のTodoを参照するための関係性を定義
     todo: Optional[Todo] = Relationship(back_populates="subtasks")
+
+# 更新時に受け取るデータモデル
+# title, deadline, memoすべてが任意(Optional)
+class TodoUpdate(SQLModel):
+    title: Optional[str] = None
+    deadline: Optional[datetime] = None
+    memo: Optional[str] = None
