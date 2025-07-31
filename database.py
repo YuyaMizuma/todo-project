@@ -4,6 +4,8 @@ from sqlmodel import create_engine, SQLModel
 
 database_url = os.getenv("DATABASE_URL")
 
+print(f"--- Renderから受け取ったDATABASE_URL: '{database_url}' ---")
+
 # RenderのPostgreSQL URLをSQLAlchemyが認識できる形式に修正
 if database_url and database_url.startswith("postgres://"):
     database_url = database_url.replace("postgres://", "postgresql://")
