@@ -1,6 +1,7 @@
 # main.py
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware # ← CORSをインポート
 from contextlib import asynccontextmanager
 from typing import List, Optional
 from sqlmodel import Session, select
@@ -15,6 +16,21 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
+
+origins = [
+    "http://localhost",
+    "http://localhost:5173", # ローカルReactサーバーのURL
+    # 将来的にデプロイするフロントエンドのURLなどもここに追加
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # データベースセッションを取得するための依存関数
 def get_session():
