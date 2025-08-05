@@ -32,3 +32,7 @@ class TodoUpdate(SQLModel):
     title: Optional[str] = None
     deadline: Optional[datetime] = None
     memo: Optional[str] = None
+
+# APIレスポンス用に、子タスクのリストを含むTodoモデルを定義
+class TodoReadWithSubtasks(Todo):
+    subtasks: List[Subtask] = []

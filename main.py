@@ -7,7 +7,7 @@ from typing import List, Optional
 from sqlmodel import Session, select
 
 from database import create_db_and_tables, engine
-from model import Todo, TodoBase, TodoUpdate, Subtask, SubtaskBase
+from model import Todo, TodoBase, TodoUpdate, Subtask, SubtaskBase, TodoReadWithSubtasks
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -47,7 +47,7 @@ def create_todo(todo: TodoBase, session: Session = Depends(get_session)):
     session.refresh(db_todo)
     return db_todo
 
-@app.get("/todos/", response_model=List[Todo])
+@app.get("/todos/", response_model=List[TodoReadWithSubtasks])
 def read_todos(
     session: Session = Depends(get_session),
     search: Optional[str] = None
