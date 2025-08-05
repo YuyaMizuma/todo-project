@@ -20,7 +20,7 @@ app = FastAPI(lifespan=lifespan)
 origins = [
     "http://localhost",
     "http://localhost:5173", # ローカルReactサーバーのURL
-    # 将来的にデプロイするフロントエンドのURLなどもここに追加
+    "https://todo-frontend-h062.onrender.com", # RenderでデプロイしたフロントエンドのURL
 ]
 
 app.add_middleware(
